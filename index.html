@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sLeppe_Oxide — Creator 5 LVL | Gold Edition</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0a0905;
+            --card-bg: rgba(20, 18, 12, 0.82);
+            --gold-primary: #ffd700;
+            --gold-light: #fff099;
+            --gold-dark: #b8860b;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --text-main: #fffdf5;
+            --text-muted: #d4ceb8;
+            --border-glow: rgba(255, 215, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Фоновый слой с аватаром в золотых тонах */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 9, 5, 0.92), rgba(5, 4, 2, 0.96)), 
+                        url('https://files.catbox.moe/50rrlw.jpg') center/cover no-repeat;
+            filter: blur(30px) brightness(0.5) sepia(0.3);
+            transform: scale(1.1);
+            z-index: -2;
+        }
+
+        /* Золотое неоновое свечение */
+        .glow-effect {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.18) 0%, rgba(184, 134, 11, 0.08) 50%, transparent 75%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulseGlow 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+        }
+
+        /* Главная карточка */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-top: 1px solid var(--gold-primary);
+            border-bottom: 1px solid var(--gold-dark);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--gold-glow);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Аватарка с золотым обрамлением */
+        .avatar-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                        linear-gradient(135deg, var(--gold-light), var(--gold-dark)) border-box;
+            box-shadow: 0 0 30px var(--gold-glow);
+            transition: transform 0.4s ease;
+        }
+
+        .avatar-container:hover .avatar {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .badge-lvl {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: linear-gradient(135deg, #fff099, #ffd700, #b8860b);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+            letter-spacing: 1px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        /* Заголовки */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #ffffff, #ffd700, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .subtitle {
+            color: var(--gold-primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 5px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+        }
+
+        /* Описание */
+        .bio {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .bio span {
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        /* Кнопки соцсетей */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(255, 215, 0, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 16px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-icon {
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold-primary);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        /* Контейнер текста с выравниванием по левому краю */
+        .link-text-box {
+            text-align: left;
+        }
+
+        .link-title {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .link-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 8px 14px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .link-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+            background: rgba(255, 215, 0, 0.08);
+        }
+
+        .link-card:hover .link-icon {
+            background: var(--gold-primary);
+            color: #000;
+            box-shadow: 0 0 10px var(--gold-primary);
+        }
+
+        .link-card:hover .btn-action {
+            background: linear-gradient(135deg, #ffffff, var(--gold-primary));
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Блок копирования ТГК */
+        .copy-section {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed rgba(255, 215, 0, 0.3);
+            border-radius: 14px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .copy-info {
+            text-align: left;
+        }
+
+        .copy-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .copy-username {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold-primary);
+        }
+
+        .copy-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: var(--gold-primary);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background: var(--gold-primary);
+            color: #000;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* Футер */
+        footer {
+            font-size: 12px;
+            color: rgba(255, 215, 0, 0.4);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <div class="glow-effect"></div>
+
+    <div class="card">
+        <!-- Аватарка -->
+        <div class="avatar-container">
+            <img src="https://files.catbox.moe/50rrlw.jpg" alt="sLeppe_Oxide" class="avatar">
+            <div class="badge-lvl">LVL 5</div>
+        </div>
+
+        <!-- Имя и заголовок -->
+        <h1>sLeppe_Oxide</h1>
+        <div class="subtitle">Official Creator</div>
+
+        <!-- Описание -->
+        <p class="bio">
+            Я являюсь <span>Креатором 5 LVL</span>. Создаю качественный и уникальный контент по игре <span>Oxide Survival Island</span>. Добро пожаловать!
+        </p>
+
+        <!-- Кнопки -->
+        <div class="links-container">
+            
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@sleppe_oxide?_r=1&_t=ZS-9AxYryInGuC" target="_blank" class="link-card">
+                <div class="link-info">
+                    <div class="link-icon"><i class="fa-brands fa-tiktok"></i></div>
+                    <div class="link-text-box">
+                        <div class="link-title">TikTok</div>
+                        <div class="link-desc">@sleppe_oxide</div>
+                    </div>
+                </div>
+                <div class="btn-action">Перейти</div>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/sLeppe_oxide" target="_blank" class="link-card">
+                <div class="link-info">
+                    <div class="link-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                    <div class="link-text-box">
+                        <div class="link-title">Telegram</div>
+                        <div class="link-desc">@sLeppe_oxide</div>
+                    </div>
+                </div>
+                <div class="btn-action">Перейти</div>
+            </a>
+
+            <!-- Сотрудничество -->
+            <a href="https://t.me/mikhailo_bm" target="_blank" class="link-card">
+                <div class="link-info">
+                    <div class="link-icon"><i class="fa-solid fa-crown"></i></div>
+                    <div class="link-text-box">
+                        <div class="link-title">Сотрудничество</div>
+                        <div class="link-desc">@mikhailo_bm</div>
+                    </div>
+                </div>
+                <div class="btn-action">Написать</div>
+            </a>
+
+        </div>
+
+        <!-- Блок копирования юзернейма ТГК -->
+        <div class="copy-section">
+            <div class="copy-info">
+                <div class="copy-label">Юзернейм ТГК:</div>
+                <div class="copy-username" id="tgUsername">@sLeppe_oxide</div>
+            </div>
+            <button class="copy-btn" onclick="copyUsername()">
+                <i class="fa-solid fa-copy"></i> <span id="copyText">Копировать</span>
+            </button>
+        </div>
+
+        <footer>
+            © Oxide Survival Island Content
+        </footer>
+    </div>
+
+    <script>
+        function copyUsername() {
+            const username = "@sLeppe_oxide";
+            navigator.clipboard.writeText(username).then(() => {
+                const copyText = document.getElementById("copyText");
+                copyText.textContent = "Готово!";
+                setTimeout(() => {
+                    copyText.textContent = "Копировать";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
